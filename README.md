@@ -1,4 +1,4 @@
-#Snake-Game
+# Snake-Game
 
 The classic snake game🐍. Made with TypeScript :)
 
