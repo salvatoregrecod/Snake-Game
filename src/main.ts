@@ -132,7 +132,7 @@ function createSnake(): void {
 
 function displayGameOver(): void {
     ctx.fillStyle = "lightgreen";
-    ctx.fillRect(0, 0, max, max);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "black";
     ctx.font = "50px Consolas";
     const text = "Game Over"
