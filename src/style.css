@@ -15,10 +15,22 @@
 
 #resetBtn {
   font-family: "Consolas";
-  font-size: 30px;
+  font-size: 1.2rem;
   width: 130px;
   border-radius: 15px;
   cursor: pointer;
+  background-color: rgb(241, 241, 241);
+}
+
+#diff-select {
+  font-family: "Consolas";
+  text-align: center;
+  border: 2px solid black;
+  font-size: 1.2rem;
+  width: 130px;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: rgb(241, 241, 241);
 }
 
 html {

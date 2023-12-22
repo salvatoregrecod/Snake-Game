@@ -1,13 +1,15 @@
-import { Direction, Point } from "./types";
+import { Difficulty, Direction, Point } from "./types";
 const scoreText = document.getElementById('score') as HTMLDivElement;
 const resetBtn = document.getElementById('resetBtn') as HTMLButtonElement;
 const canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
+const difficultySelect = document.getElementById('diff-select') as HTMLSelectElement;
 const ctx = canvas.getContext('2d')!; 
 const unitSize = 25;
 const max = canvas.width - unitSize;
 const min = 0;
 let score = 0;
 let running = true;
+let speed = 110;
 let direction: Direction;
 let intervalId: number;
 const fruit: Point = { x:  0, y: 0 };
@@ -18,8 +20,53 @@ const snake: Point[] = [
     { x: 0, y: 0 }
 ]
 
+difficultySelect.onchange = () => {    
+    switch (difficultySelect.value) {
+        case Difficulty.Easy:
+            speed = 110;
+            break;
+    
+        case Difficulty.Medium:
+            speed = 75;
+            break;
+    
+        case Difficulty.Hard:
+            speed = 45;
+            break;
+    }
+    clearInterval(intervalId);
+    intervalId = setInterval(updateGame, speed);
+    difficultySelect.blur();
+}
+
+resetBtn.onclick = () => {
+    location.reload();
+}
+
+createSnake();
+createFruit();
+intervalId = setInterval(updateGame, speed);
+
+window.addEventListener("keydown", event => {
+    switch (event.key) {
+        case "ArrowRight":
+            if (direction != Direction.Left) direction = Direction.Right;
+            break;
+        case "ArrowLeft":
+            if (direction != Direction.Right) direction = Direction.Left;
+            break;
+        case "ArrowUp":
+            if (direction != Direction.Down) direction = Direction.Up;
+            break;
+        case "ArrowDown":
+            if (direction != Direction.Up) direction = Direction.Down;
+            break;
+    }
+});
+
 function updateGame(): void {
     if (running && direction) {
+        difficultySelect.disabled = true;
         ctx.fillStyle = "lightgreen";
         ctx.fillRect(snake[snake.length - 1].x, snake[snake.length - 1].y, unitSize, unitSize);
 
@@ -95,8 +142,8 @@ function displayGameOver(): void {
 
 function createFruit(): void {
     do {
-        fruit.x = randomCoordenate();
-        fruit.y = randomCoordenate();
+        fruit.x = randomCoordinate();
+        fruit.y = randomCoordinate();
     } while (!checkCoordenates());
     ctx.fillStyle = "red";
     ctx.fillRect(fruit.x, fruit.y, unitSize, unitSize);
@@ -106,31 +153,6 @@ function checkCoordenates(): boolean {
     return snake.every(segment => segment.x != fruit.x || segment.y != fruit.y)
 }
 
-function randomCoordenate(): number {
+function randomCoordinate(): number {
     return Math.floor(Math.random() * (max / unitSize + 1)) * unitSize;
 }
-
-resetBtn.onclick = () => {
-    location.reload();
-}
-
-createSnake();
-createFruit();
-intervalId = setInterval(updateGame, 70);
-
-window.addEventListener("keydown", event => {
-    switch (event.key) {
-        case "ArrowRight":
-            if (direction != Direction.Left) direction = Direction.Right;
-            break;
-        case "ArrowLeft":
-            if (direction != Direction.Right) direction = Direction.Left;
-            break;
-        case "ArrowUp":
-            if (direction != Direction.Down) direction = Direction.Up;
-            break;
-        case "ArrowDown":
-            if (direction != Direction.Up) direction = Direction.Down;
-            break;
-    }
-});
