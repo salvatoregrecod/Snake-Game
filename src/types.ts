@@ -9,3 +9,9 @@ export interface Point {
     x: number,
     y: number
 }
+
+export enum Difficulty {
+    Easy = 'easy',
+    Medium = 'medium',
+    Hard = 'hard'
+}
