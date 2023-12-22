@@ -1,0 +1,26 @@
+#gameBoard{
+  text-align: center;
+}
+
+#gameCanvas {
+  border: 5px solid;
+  background-color: lightgreen;
+}
+
+#score {
+  font-family: "Consolas";
+  font-size: 60px;
+  margin: 10px;
+}
+
+#resetBtn {
+  font-family: "Consolas";
+  font-size: 30px;
+  width: 130px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+html {
+  background-color: antiquewhite;
+}
