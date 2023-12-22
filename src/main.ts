@@ -3,13 +3,13 @@ const scoreText = document.getElementById('score') as HTMLDivElement;
 const resetBtn = document.getElementById('resetBtn') as HTMLButtonElement;
 const canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d')!; 
-const unitSize: number = 25;
-const max: number = canvas.width - unitSize;
-const min: number = 0;
+const unitSize = 25;
+const max = canvas.width - unitSize;
+const min = 0;
+let score = 0;
+let running = true;
 let direction: Direction;
 let intervalId: number;
-let score: number = 0;
-let running: boolean = true;
 const fruit: Point = { x:  0, y: 0 };
 const snake: Point[] = [
     { x: unitSize * 3, y: 0},
