@@ -1,3 +1,4 @@
+import { Direction, Point } from "./types";
 const scoreText = document.getElementById('score') as HTMLDivElement;
 const resetBtn = document.getElementById('resetBtn') as HTMLButtonElement;
 const canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
@@ -16,18 +17,6 @@ const snake: Point[] = [
     { x: unitSize, y: 0 },
     { x: 0, y: 0 }
 ]
-
-enum Direction {
-    Right = 1,
-    Left,
-    Up,
-    Down
-}
-
-interface Point {
-    x: number,
-    y: number
-}
 
 function updateGame(): void {
     if (running && direction) {
